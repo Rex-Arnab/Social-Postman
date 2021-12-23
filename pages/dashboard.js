@@ -1,17 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Navbar from '../components/Navbar'
 
 export default function dashboard() {
     const [posts, setPosts] = useState([])
-    useEffect(async () => {
-        const resp = await axios.get('http://localhost:4000/api/posts/1')
-        console.log(resp);
-        if(resp.status === 200) {
-            setPosts(resp.data)
-        }
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/posts/1').then(res => {
+            console.log(resp);
+            if(resp.status === 200) {
+                setPosts(resp.data)
+            }
+        })
     }, [])
     return (
         <div className="container">
